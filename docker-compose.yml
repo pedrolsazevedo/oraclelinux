@@ -1,0 +1,17 @@
+services:
+  oraclelinux-tf-oci:
+    container_name: oraclelinux-tf-oci
+    image: psazevedo/oraclelinux:terraform-ocicli
+    build: .
+    environment:
+    # https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/terraformproviderconfiguration.htm
+      - TF_VAR_tenancy_ocid=<tenancy_OCID>
+      - TF_VAR_compartment_ocid=<compartment_OCID>
+      - TF_VAR_user_ocid=<user_OCID>
+      - TF_VAR_fingerprint=<key_fingerprint>
+      - TF_VAR_private_key_path=<private_key_path>
+    volumes:
+      - .:/tf
+    stdin_open: true
+    tty: true
+    privileged: false
